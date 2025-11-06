@@ -1,0 +1,112 @@
+<<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunny Cafe - Contact</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'sunny-yellow': '#FDB813',
+                        'sunny-orange': '#FF6B35',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-md">
+        <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-sunny-orange">Sunny Cafe</h1>
+            <ul class="hidden md:flex space-x-6">
+                <li><a href="/index.html" class="text-gray-700 hover:text-sunny-orange">Home</a></li>
+                <li><a href="/menu.html" class="text-gray-700 hover:text-sunny-orange">Menu</a></li>
+                <li><a href="/about.html" class="text-gray-700 hover:text-sunny-orange">About</a></li>
+                <li><a href="/contact.html" class="text-gray-700 hover:text-sunny-orange">Contact</a></li>
+            </ul>
+            <button class="md:hidden">Menu</button>
+        </nav>
+    </header>
+
+    <!-- Contact Section -->
+    <section class="py-16">
+        <div class="container mx-auto px-4 max-w-2xl">
+            <h2 class="text-4xl font-bold text-center mb-8 text-gray-800">Contact Us</h2>
+            <p class="text-center text-gray-600 mb-12">Have questions? We'd love to hear from you!</p>
+            
+            <!-- Contact Info -->
+            <div class="bg-white p-6 rounded-lg shadow-md mb-8 text-center">
+                <h3 class="text-xl font-semibold text-sunny-orange mb-4">Visit Us</h3>
+                <p>123 Sunny Street, Cafe City, CA 12345</p>
+                <p class="mt-2">Phone: (555) 123-4567</p>
+                <p>Email: hello@sunnycafe.com</p>
+            </div>
+
+            <!-- Form -->
+            <form id="contactForm" class="bg-white p-6 rounded-lg shadow-md">
+                <div class="mb-4">
+                    <label for="name" class="block text-gray-700 font-semibold mb-2">Name</label>
+                    <input type="text" id="name" name="name" required class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sunny-orange">
+                </div>
+                <div class="mb-4">
+                    <label for="email" class="block text-gray-700 font-semibold mb-2">Email</label>
+                    <input type="email" id="email" name="email" required class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sunny-orange">
+                </div>
+                <div class="mb-6">
+                    <label for="message" class="block text-gray-700 font-semibold mb-2">Message</label>
+                    <textarea id="message" name="message" rows="5" required class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sunny-orange"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-sunny-orange text-white py-3 rounded-md font-semibold hover:bg-sunny-yellow transition">Send Message</button>
+            </form>
+
+            <div id="formMessage" class="mt-4 hidden text-center"></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2023 Sunny Cafe. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData);
+
+            try {
+                const response = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                const result = await response.json();
+
+                const messageEl = document.getElementById('formMessage');
+                if (response.ok) {
+                    messageEl.textContent = 'Message sent successfully!';
+                    messageEl.className = 'mt-4 text-center text-green-600 visible';
+                    e.target.reset();
+                } else {
+                    messageEl.textContent = result.error || 'Failed to send message.';
+                    messageEl.className = 'mt-4 text-center text-red-600 visible';
+                }
+                messageEl.classList.remove('hidden');
+            } catch (error) {
+                console.error('Error:', error);
+                const messageEl = document.getElementById('formMessage');
+                messageEl.textContent = 'An error occurred. Please try again.';
+                messageEl.className = 'mt-4 text-center text-red-600 visible';
+                messageEl.classList.remove('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
