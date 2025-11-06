@@ -1,0 +1,63 @@
+<<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunny Cafe - About</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'sunny-yellow': '#FDB813',
+                        'sunny-orange': '#FF6B35',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-md">
+        <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-sunny-orange">Sunny Cafe</h1>
+            <ul class="hidden md:flex space-x-6">
+                <li><a href="/index.html" class="text-gray-700 hover:text-sunny-orange">Home</a></li>
+                <li><a href="/menu.html" class="text-gray-700 hover:text-sunny-orange">Menu</a></li>
+                <li><a href="/about.html" class="text-gray-700 hover:text-sunny-orange">About</a></li>
+                <li><a href="/contact.html" class="text-gray-700 hover:text-sunny-orange">Contact</a></li>
+            </ul>
+            <button class="md:hidden">Menu</button>
+        </nav>
+    </header>
+
+    <!-- About Section -->
+    <section class="py-16">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <h2 class="text-4xl font-bold text-center mb-8 text-gray-800">About Sunny Cafe</h2>
+            <p class="text-lg text-gray-700 mb-8 text-center">Sunny Cafe is a family-owned coffee shop dedicated to providing high-quality coffee and fresh baked goods in a warm, inviting atmosphere.</p>
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h3 class="text-2xl font-semibold text-sunny-orange mb-4">Our Story</h3>
+                    <p class="text-gray-600 mb-4">Founded in 2015, Sunny Cafe started as a small dream to bring the community together over great coffee. We've grown but kept our cozy vibe.</p>
+                    <h3 class="text-2xl font-semibold text-sunny-orange mb-4">Our Mission</h3>
+                    <p class="text-gray-600">To serve the best coffee and pastries while creating a sunny spot for everyone to relax and enjoy.</p>
+                </div>
+                <div class="bg-sunny-yellow p-8 rounded-lg text-center">
+                    <span class="text-6xl">☕</span>
+                    <p class="text-white font-semibold mt-4">Freshly Brewed Daily</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2023 Sunny Cafe. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
